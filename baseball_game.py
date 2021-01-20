@@ -31,7 +31,7 @@ def is_digit(user_input_number):
     # '''
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당
-    if all(n.isdigit() for n in user_input_number):
+    if user_input_number.isdigit():
         result = True
     else:
         result = False
@@ -271,7 +271,6 @@ def main():
     print("Play Baseball")
     user_input = 999
     random_number = str(get_not_duplicated_three_digit_number())
-    #random_number = input('randoam_number : ')
     print("Random Number is : ", random_number)
     # ===Modify codes below=============
     # 위의 코드를 포함하여 자유로운 수정이 가능함
@@ -285,16 +284,18 @@ def main():
                 strikes, ball = get_strikes_or_ball(user_input, random_number)
                 print(f'Strikes : {strikes} , Balls : {ball}')
                 if strikes == 3:
-                    answer = input('You win, one more(Y/N) ?')
-                    if is_yes(answer):
-                        main()
-                        return
-                    elif is_no(answer):
-                        answer = 'N'
-                    else:
-                        while not is_yes(answer) and not is_no(answer):
+                    while True: 
+                        answer = input('You win, one more(Y/N) ?')
+                        if is_yes(answer):
+                            random_number = str(get_not_duplicated_three_digit_number())
+                            print("Random Number is : ", random_number)
+                            break
+                        elif is_no(answer):
+                            answer = 'N'
+                            break
+                        else:
                             print('Wrong Input, Input again')
-                            answer = input('You win, one more(Y/N) ?')
+                            
                     
             else:
                 print('Wrong Input, Input again')
